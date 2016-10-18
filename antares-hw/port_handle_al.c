@@ -12,10 +12,8 @@ PORT_HANDLE open_port_helper(const char *dev_name) {
 	PORT_HANDLE ph;
 	memset(&tios, 0, sizeof(tios));
 	ph = open(dev_name, O_RDWR | O_NOCTTY | O_NONBLOCK);
-	if (ph < 0) {
-		ph = 0;
+	if (ph < 0) 
 		return PORT_ERROR;
-	}
 	tios.c_cflag		= B38400 | CS8 | CLOCAL | CREAD;
 	tios.c_iflag		= IGNPAR;
 	tios.c_oflag		= 0;
@@ -65,10 +63,8 @@ PORT_HANDLE open_port_helper(const char *dev_name) {
 	PORT_HANDLE ph = CreateFileA(dev_name,
 		GENERIC_READ | GENERIC_WRITE,
 		0, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
-	if (ph < 0) {
-		ph = 0;
+	if (ph < 0) 
 		return PORT_ERROR;
-	}
 
 	if (SetCommMask(ph, 0) == FALSE)
 		return PORT_ERROR;
