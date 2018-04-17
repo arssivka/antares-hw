@@ -14,7 +14,7 @@
 *.la
 *.lo
 
-# Shared objects (include. Windows DLLs)
+# Shared objects (src. Windows DLLs)
 *.dll
 *.so
 *.so.*
