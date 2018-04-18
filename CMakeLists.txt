@@ -12,11 +12,17 @@ option(ANTARES_HW_BUFFER_LENGTH_CHECK "Check buffer length in all functions" ON)
 file(GLOB_RECURSE SRCS "src/*.c")
 file(GLOB_RECURSE HDRS "src/*.h")
 
-add_library(antares-hw SHARED ${SRCS} ${HDRS})
-target_include_directories(antares-hw PUBLIC src)
+add_library(${PROJECT_NAME} STATIC ${SRCS} ${HDRS})
+target_include_directories(${PROJECT_NAME} PUBLIC src)
 
-if(BUILD_HW_TEST)
+if(ANTARES_HW_BUILD_TEST)
+    set(Boost_USE_STATIC_LIBS ON) # Link main function for Boost Unit Test Framework
+    find_package(Boost COMPONENTS unit_test_framework REQUIRED)
+    file(GLOB_RECURSE TSTS "tst/*.cpp" "tst/.c" "tst/*.h")
+    add_executable(${PROJECT_NAME}-test ${TSTS})
+    target_link_libraries(${PROJECT_NAME}-test ${PROJECT_NAME} ${Boost_LIBRARIES})
+    target_include_directories(${PROJECT_NAME}-test PUBLIC ${Boost_INCLUDE_DIRS})
 endif()
 
-install(FILES ${HDRS} DESTINATION src/${PROJECT_NAME})
+install(FILES ${HDRS} DESTINATION include/${PROJECT_NAME})
 install(TARGETS antares-hw DESTINATION lib/${PROJECT_NAME})

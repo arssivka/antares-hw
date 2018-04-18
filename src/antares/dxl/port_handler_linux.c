@@ -29,7 +29,7 @@ port_handle_t port_open_linux(const char* dev_name) {
     memset(&tios, 0, sizeof(tios));
     ph = open(dev_name, O_RDWR | O_NOCTTY);
     if (ph < 0)
-        return PORT_ERROR;
+        return 0;
     tios.c_cflag = B38400 | CS8 | CLOCAL | CREAD;
     tios.c_iflag = IGNPAR;
     tios.c_oflag = 0;
@@ -61,12 +61,12 @@ port_handle_t port_open_linux(const char* dev_name) {
 int port_set_baudrate_linux(port_handle_t ph, int baudrate) {
     struct termios2 t;
     if (ioctl(ph, TCGETS2, &t) < 0)
-        return PORT_ERROR;
+        return 0;
     t.c_cflag = (t.c_cflag & ~CBAUD) | BOTHER;
     t.c_ispeed = t.c_ospeed = baudrate;
     if (ioctl(ph, TCSETS2, &t) < 0)
-        return PORT_ERROR;
-    return PORT_SUCESS;
+        return 0;
+    return 1;
 }
 
 
