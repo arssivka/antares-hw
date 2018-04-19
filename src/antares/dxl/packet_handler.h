@@ -32,7 +32,7 @@
 
 #define DXL_HEADER                        (0xFF) /**< First two bytes of every package is 0xFF */
 #define DXL_PACKAGE_HEADER_LENGTH         (0x04) /**< HEADER_1, HEADER_2, ID, LENGTH */
-#define DXL_DATA_DESKRIPTION_LENGTH       (0x02) /**< INSTRUCTION, checksum */
+#define DXL_DATA_DESCRIPTION_LENGTH       (0x02) /**< INSTRUCTION, checksum */
 #define DXL_STATUS_PACKET_LENGTH          (0x06) /**< Read request answer length without data */
 #define DXL_BROADCAST_ID                  (0xFE) /**< Device ID for broadcasting package */
 

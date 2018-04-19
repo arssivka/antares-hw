@@ -56,7 +56,7 @@ uint8_t packet_add_checksum(uint8_t* buff, int buff_len) {
 
 uint8_t packet_make_ping(uint8_t* buff, int buff_len, uint8_t dev_id) {
     // Check for buffer length
-    if (buff_len <= DXL_PACKAGE_HEADER_LENGTH + DXL_DATA_DESKRIPTION_LENGTH) {
+    if (buff_len <= DXL_PACKAGE_HEADER_LENGTH + DXL_DATA_DESCRIPTION_LENGTH) {
         return (uint8_t) DXL_FAIL;
     }
     // Prepare package header
@@ -65,14 +65,14 @@ uint8_t packet_make_ping(uint8_t* buff, int buff_len, uint8_t dev_id) {
     buff[DXL_POS_REQ_ID] =            (uint8_t) dev_id;
     buff[DXL_POS_REQ_CMD] =           (uint8_t) DXL_CMD_PING;
     // Prepare package data
-    buff[DXL_POS_REQ_LENGTH] =        (uint8_t) DXL_DATA_DESKRIPTION_LENGTH;
+    buff[DXL_POS_REQ_LENGTH] =        (uint8_t) DXL_DATA_DESCRIPTION_LENGTH;
     return (uint8_t) (buff[DXL_POS_REQ_LENGTH] + DXL_PACKAGE_HEADER_LENGTH);
 }
 
 
 uint8_t packet_make_reset(uint8_t* buff, int buff_len, uint8_t dev_id) {
     // Check for buffer length
-    if (buff_len <= DXL_PACKAGE_HEADER_LENGTH + DXL_DATA_DESKRIPTION_LENGTH) {
+    if (buff_len <= DXL_PACKAGE_HEADER_LENGTH + DXL_DATA_DESCRIPTION_LENGTH) {
         return (uint8_t) DXL_FAIL;
     }
     // Prepare package header
@@ -81,7 +81,7 @@ uint8_t packet_make_reset(uint8_t* buff, int buff_len, uint8_t dev_id) {
     buff[DXL_POS_REQ_ID] =            (uint8_t) dev_id;
     buff[DXL_POS_REQ_CMD] =           (uint8_t) DXL_CMD_RESET;
     // Prepare package data
-    buff[DXL_POS_REQ_LENGTH] =        (uint8_t) DXL_DATA_DESKRIPTION_LENGTH;
+    buff[DXL_POS_REQ_LENGTH] =        (uint8_t) DXL_DATA_DESCRIPTION_LENGTH;
     return (uint8_t) (buff[DXL_POS_REQ_LENGTH] + DXL_PACKAGE_HEADER_LENGTH);
 }
 
@@ -89,7 +89,7 @@ uint8_t packet_make_reset(uint8_t* buff, int buff_len, uint8_t dev_id) {
 uint8_t packet_make_write(uint8_t* buff, int buff_len, uint8_t dev_id, uint8_t ctrl_tab_addr, uint8_t* data,
                           uint8_t data_len) {
     // Check for buffer length
-    if (buff_len <= DXL_PACKAGE_HEADER_LENGTH + DXL_DATA_DESKRIPTION_LENGTH + DXL_PARAM_BYTE + data_len) {
+    if (buff_len <= DXL_PACKAGE_HEADER_LENGTH + DXL_DATA_DESCRIPTION_LENGTH + DXL_PARAM_BYTE + data_len) {
         return (uint8_t) DXL_FAIL;
     }
     // Prepare package header
@@ -98,7 +98,7 @@ uint8_t packet_make_write(uint8_t* buff, int buff_len, uint8_t dev_id, uint8_t c
     buff[DXL_POS_REQ_ID] =            (uint8_t) dev_id;
     buff[DXL_POS_REQ_CMD] =           (uint8_t) DXL_CMD_WRITE;
     // Prepare package data
-    buff[DXL_POS_REQ_LENGTH] =        (uint8_t) (DXL_DATA_DESKRIPTION_LENGTH + DXL_PARAM_BYTE + data_len);
+    buff[DXL_POS_REQ_LENGTH] =        (uint8_t) (DXL_DATA_DESCRIPTION_LENGTH + DXL_PARAM_BYTE + data_len);
     buff[DXL_POS_REQ_PARAMS] =        (uint8_t) ctrl_tab_addr;
     memcpy(&buff[DXL_POS_REQ_PARAMS + 1], data, data_len);
     return (uint8_t) (buff[DXL_POS_REQ_LENGTH] + DXL_PACKAGE_HEADER_LENGTH);
@@ -108,13 +108,13 @@ uint8_t packet_make_write(uint8_t* buff, int buff_len, uint8_t dev_id, uint8_t c
 uint8_t packet_update_write(uint8_t* buff, int buff_len, uint8_t dev_id, uint8_t ctrl_tab_addr, uint8_t* data,
                             uint8_t data_len) {
     // Check for buffer length
-    if (buff_len <= DXL_PACKAGE_HEADER_LENGTH + DXL_DATA_DESKRIPTION_LENGTH + 0x01 + data_len) {
+    if (buff_len <= DXL_PACKAGE_HEADER_LENGTH + DXL_DATA_DESCRIPTION_LENGTH + 0x01 + data_len) {
         return (uint8_t) DXL_FAIL;
     }
     // Prepare package header
     buff[DXL_POS_REQ_ID] =            (uint8_t) dev_id;
     // Prepare package data
-    buff[DXL_POS_REQ_LENGTH] =        (uint8_t) (DXL_DATA_DESKRIPTION_LENGTH + DXL_PARAM_BYTE + data_len);
+    buff[DXL_POS_REQ_LENGTH] =        (uint8_t) (DXL_DATA_DESCRIPTION_LENGTH + DXL_PARAM_BYTE + data_len);
     buff[DXL_POS_REQ_PARAMS] =        (uint8_t) ctrl_tab_addr;
     memcpy(&buff[DXL_POS_REQ_PARAMS + 1], data, data_len);
     return (uint8_t) (buff[DXL_POS_REQ_LENGTH] + DXL_PACKAGE_HEADER_LENGTH);
@@ -123,7 +123,7 @@ uint8_t packet_update_write(uint8_t* buff, int buff_len, uint8_t dev_id, uint8_t
 
 uint8_t packet_make_read(uint8_t* buff, int buff_len, uint8_t dev_id, uint8_t ctrl_tab_addr, uint8_t data_len) {
     // Check for buffer length
-    if (buff_len <= DXL_PACKAGE_HEADER_LENGTH + DXL_DATA_DESKRIPTION_LENGTH + 2 * DXL_PARAM_BYTE) {
+    if (buff_len <= DXL_PACKAGE_HEADER_LENGTH + DXL_DATA_DESCRIPTION_LENGTH + 2 * DXL_PARAM_BYTE) {
         return (uint8_t) DXL_FAIL;
     }
     // Prepare package header
@@ -132,7 +132,7 @@ uint8_t packet_make_read(uint8_t* buff, int buff_len, uint8_t dev_id, uint8_t ct
     buff[DXL_POS_REQ_ID] =            (uint8_t) dev_id;
     buff[DXL_POS_REQ_CMD] =           (uint8_t) DXL_CMD_READ;
     // Prepare package data
-    buff[DXL_POS_REQ_LENGTH] =        (uint8_t) DXL_DATA_DESKRIPTION_LENGTH + 2 * DXL_PARAM_BYTE;
+    buff[DXL_POS_REQ_LENGTH] =        (uint8_t) DXL_DATA_DESCRIPTION_LENGTH + 2 * DXL_PARAM_BYTE;
     buff[DXL_POS_REQ_PARAMS] =        (uint8_t) ctrl_tab_addr;
     buff[DXL_POS_REQ_PARAMS + 1] =    (uint8_t) data_len;
     return (uint8_t) (buff[DXL_POS_REQ_LENGTH] + DXL_PACKAGE_HEADER_LENGTH);
@@ -141,7 +141,7 @@ uint8_t packet_make_read(uint8_t* buff, int buff_len, uint8_t dev_id, uint8_t ct
 
 uint8_t packet_update_read(uint8_t* buff, int buff_len, uint8_t dev_id, uint8_t ctrl_tab_addr, uint8_t data_len) {
     // Check for buffer length
-    if (buff_len <= DXL_PACKAGE_HEADER_LENGTH + DXL_DATA_DESKRIPTION_LENGTH + 2 * DXL_PARAM_BYTE) {
+    if (buff_len <= DXL_PACKAGE_HEADER_LENGTH + DXL_DATA_DESCRIPTION_LENGTH + 2 * DXL_PARAM_BYTE) {
         return (uint8_t) DXL_FAIL;
     }
     // Prepare package header
@@ -168,7 +168,7 @@ uint8_t packet_calculate_read_answer_len(const uint8_t* buff, int buff_len) {
 
 uint8_t packet_init_bulk_read(uint8_t* buff, int buff_len) {
     // Check for buffer length
-    if (buff_len <= DXL_PACKAGE_HEADER_LENGTH + DXL_DATA_DESKRIPTION_LENGTH + DXL_PARAM_BYTE) {
+    if (buff_len <= DXL_PACKAGE_HEADER_LENGTH + DXL_DATA_DESCRIPTION_LENGTH + DXL_PARAM_BYTE) {
         return (uint8_t) DXL_FAIL;
     }
     // Prepare package header
@@ -177,7 +177,7 @@ uint8_t packet_init_bulk_read(uint8_t* buff, int buff_len) {
     buff[DXL_POS_REQ_ID] =            (uint8_t) DXL_BROADCAST_ID;
     buff[DXL_POS_REQ_CMD] =           (uint8_t) DXL_CMD_BULK_READ;
     // Prepare package data
-    buff[DXL_POS_REQ_LENGTH] =        (uint8_t) (DXL_DATA_DESKRIPTION_LENGTH + DXL_PARAM_BYTE);
+    buff[DXL_POS_REQ_LENGTH] =        (uint8_t) (DXL_DATA_DESCRIPTION_LENGTH + DXL_PARAM_BYTE);
     buff[DXL_POS_REQ_PARAMS] =        (uint8_t) 0x00; // Always zero
     return (uint8_t) (buff[DXL_POS_REQ_LENGTH] + DXL_PACKAGE_HEADER_LENGTH);
 }
@@ -205,7 +205,7 @@ uint8_t packet_resize_bulk_read_data(uint8_t* buff, int buff_len, int param_coun
     if (buff_len <= DXL_POS_REQ_LENGTH) {
         return (uint8_t) DXL_FAIL;
     }
-    buff[DXL_POS_REQ_LENGTH] = (uint8_t) (DXL_DATA_DESKRIPTION_LENGTH + (1 + 3 * param_count) * DXL_PARAM_BYTE);
+    buff[DXL_POS_REQ_LENGTH] = (uint8_t) (DXL_DATA_DESCRIPTION_LENGTH + (1 + 3 * param_count) * DXL_PARAM_BYTE);
     return (uint8_t) (buff[DXL_POS_REQ_LENGTH] + DXL_PACKAGE_HEADER_LENGTH);
 }
 
@@ -213,7 +213,7 @@ uint8_t packet_resize_bulk_read_data(uint8_t* buff, int buff_len, int param_coun
 uint8_t packet_update_bulk_read_data(uint8_t* buff, int buff_len, uint8_t index, uint8_t dev_id, uint8_t ctrl_tab_addr,
                                      uint8_t data_len) {
     // Parameter position
-    int pos = DXL_DATA_DESKRIPTION_LENGTH + (1 +  3 * index) * DXL_PARAM_BYTE;
+    int pos = DXL_DATA_DESCRIPTION_LENGTH + (1 +  3 * index) * DXL_PARAM_BYTE;
     // Buffer length check
     if (buff_len <= pos + 3) {
         return (uint8_t) DXL_FAIL;
@@ -230,7 +230,7 @@ uint8_t packet_clean_bulk_read_data(uint8_t* buff, int buff_len) {
     if (buff_len <= DXL_POS_REQ_LENGTH) {
         return (uint8_t) DXL_FAIL;
     }
-    buff[DXL_POS_REQ_LENGTH] = (uint8_t) (DXL_DATA_DESKRIPTION_LENGTH + DXL_PARAM_BYTE);
+    buff[DXL_POS_REQ_LENGTH] = (uint8_t) (DXL_DATA_DESCRIPTION_LENGTH + DXL_PARAM_BYTE);
     return (uint8_t) (buff[DXL_POS_REQ_LENGTH] + DXL_PACKAGE_HEADER_LENGTH);
 }
 
@@ -244,7 +244,7 @@ uint8_t packet_calculate_bulk_read_answer_len(const uint8_t* buff, int buff_len)
     int data_len;
     int dev_id_count;
 
-    dev_id_count = (buff[DXL_POS_REQ_LENGTH] - DXL_DATA_DESKRIPTION_LENGTH - DXL_PARAM_BYTE) / (3 * DXL_PARAM_BYTE);
+    dev_id_count = (buff[DXL_POS_REQ_LENGTH] - DXL_DATA_DESCRIPTION_LENGTH - DXL_PARAM_BYTE) / (3 * DXL_PARAM_BYTE);
     answer_len = 0;
     if (dev_id_count > 0) {
         data_len = buff[DXL_POS_REQ_PARAMS + 1];
@@ -256,7 +256,7 @@ uint8_t packet_calculate_bulk_read_answer_len(const uint8_t* buff, int buff_len)
 
 uint8_t packet_init_bulk_write(uint8_t* buff, int buff_len, uint8_t ctrl_tab_addr, uint8_t data_len) {
     // Check for buffer length
-    if (buff_len <= DXL_PACKAGE_HEADER_LENGTH + DXL_DATA_DESKRIPTION_LENGTH + 2 * DXL_PARAM_BYTE) {
+    if (buff_len <= DXL_PACKAGE_HEADER_LENGTH + DXL_DATA_DESCRIPTION_LENGTH + 2 * DXL_PARAM_BYTE) {
         return (uint8_t) DXL_FAIL;
     }
     // Prepare package header
@@ -265,7 +265,7 @@ uint8_t packet_init_bulk_write(uint8_t* buff, int buff_len, uint8_t ctrl_tab_add
     buff[DXL_POS_REQ_ID] =            (uint8_t) DXL_BROADCAST_ID;
     buff[DXL_POS_REQ_CMD] =           (uint8_t) DXL_CMD_BULK_WRITE;
     // Prepare package data
-    buff[DXL_POS_REQ_LENGTH] =        (uint8_t) (DXL_DATA_DESKRIPTION_LENGTH + 2 * DXL_PARAM_BYTE);
+    buff[DXL_POS_REQ_LENGTH] =        (uint8_t) (DXL_DATA_DESCRIPTION_LENGTH + 2 * DXL_PARAM_BYTE);
     buff[DXL_POS_REQ_PARAMS] =        (uint8_t) ctrl_tab_addr;
     buff[DXL_POS_REQ_PARAMS + 1] = data_len;
     buff[DXL_POS_REQ_PARAMS + buff[DXL_POS_REQ_LENGTH] - 2] = calculate_checksum(buff, 0);
@@ -300,7 +300,7 @@ uint8_t packet_resize_bulk_write_data(uint8_t* buff, int buff_len, int param_cou
             buff[DXL_POS_REQ_PARAMS + 1] != data_len) {
         return (uint8_t) DXL_FAIL;
     }
-    buff[DXL_POS_REQ_LENGTH] = (uint8_t) (DXL_DATA_DESKRIPTION_LENGTH + (2 + (data_len + 1) * param_count) * DXL_PARAM_BYTE);
+    buff[DXL_POS_REQ_LENGTH] = (uint8_t) (DXL_DATA_DESCRIPTION_LENGTH + (2 + (data_len + 1) * param_count) * DXL_PARAM_BYTE);
     return (uint8_t) (buff[DXL_POS_REQ_LENGTH] + DXL_PACKAGE_HEADER_LENGTH);
 }
 
@@ -315,7 +315,7 @@ uint8_t packet_update_bulk_write_data(uint8_t* buff, int buff_len, uint8_t index
         return (uint8_t) DXL_FAIL;
     }
     // Parameter position
-    int pos = DXL_DATA_DESKRIPTION_LENGTH + (2 + (data_len + 1) * index) * DXL_PARAM_BYTE;
+    int pos = DXL_DATA_DESCRIPTION_LENGTH + (2 + (data_len + 1) * index) * DXL_PARAM_BYTE;
     // Update data
     buff[pos++] = dev_id;
     memcpy(&buff[pos], data, data_len);
@@ -329,7 +329,7 @@ uint8_t packet_clean_bulk_write_data(uint8_t* buff, int buff_len) {
         return (uint8_t) DXL_FAIL;
     }
 
-    buff[DXL_POS_REQ_LENGTH] = (uint8_t) (DXL_DATA_DESKRIPTION_LENGTH + 2 * DXL_PARAM_BYTE);
+    buff[DXL_POS_REQ_LENGTH] = (uint8_t) (DXL_DATA_DESCRIPTION_LENGTH + 2 * DXL_PARAM_BYTE);
     return (uint8_t) (buff[DXL_POS_REQ_LENGTH] + DXL_PACKAGE_HEADER_LENGTH);
 }
 
