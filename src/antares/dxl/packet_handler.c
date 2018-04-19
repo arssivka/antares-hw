@@ -160,14 +160,8 @@ uint8_t packet_calculate_read_answer_len(const uint8_t* buff, int buff_len) {
 
     int answer_len;
     int data_len;
-    int dev_id_count;
-
-    dev_id_count = (buff[DXL_POS_REQ_LENGTH] - DXL_DATA_DESKRIPTION_LENGTH - DXL_PARAM_BYTE) / (3 * DXL_PARAM_BYTE);
-    answer_len = 0;
-    if (dev_id_count > 0) {
-        data_len = buff[DXL_POS_REQ_PARAMS + 1];
-        answer_len = (data_len + DXL_STATUS_PACKET_LENGTH) * dev_id_count;
-    }
+    data_len = buff[DXL_POS_REQ_PARAMS + 1];
+    answer_len = data_len + DXL_STATUS_PACKET_LENGTH;
     return (uint8_t) answer_len;
 }
 

@@ -33,7 +33,7 @@
 #define DXL_HEADER                        (0xFF) /**< First two bytes of every package is 0xFF */
 #define DXL_PACKAGE_HEADER_LENGTH         (0x04) /**< HEADER_1, HEADER_2, ID, LENGTH */
 #define DXL_DATA_DESKRIPTION_LENGTH       (0x02) /**< INSTRUCTION, checksum */
-#define DXL_STATUS_PACKET_LENGTH          (0x06) //TODO
+#define DXL_STATUS_PACKET_LENGTH          (0x06) /**< Read request answer length without data */
 #define DXL_BROADCAST_ID                  (0xFE) /**< Device ID for broadcasting package */
 
 #define DXL_POS_REQ_HEADER_1              (0x00) /**< Required by protocol (always 0xFF) */
@@ -212,7 +212,11 @@ uint8_t packet_make_read(uint8_t* buff, int buff_len, uint8_t dev_id, uint8_t ct
 uint8_t packet_update_read(uint8_t* buff, int buff_len, uint8_t dev_id, uint8_t ctrl_tab_addr, uint8_t data_len);
 
 
-// TODO Implementation and documentation
+/// \brief Calculate answer size for single read request package.
+///        Request must be initialized before (\see packet_make_read).
+/// \param buff Package buffer
+/// \param buff_len Length of package buffer
+/// \returns Package length if success or DXL_FAIL if length check error
 uint8_t packet_calculate_read_answer_len(const uint8_t* buff, int buff_len);
 
 
