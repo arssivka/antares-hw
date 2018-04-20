@@ -1,11 +1,11 @@
 # Antares HW
 
-This repo contains set of C functions for manipulate with
+This repo contains set of C functions for manipulate
 Antares hardware. Antares is a anthropomorphic robot developed
-at [SPIIRAS](http://www.spiiras.nw.ru/). Robot hardware use
+at [SPIIRAS](http://www.spiiras.nw.ru/). Robot hardware used
 [Dynamixel v1](http://support.robotis.com/en/product/actuator/dynamixel/dxl_communication.htm)
 protocol for communicating with sensors and actuators. This
-function fimplify constructing of packets for Dynamixel
+function simplify constructing of packets for Dynamixel
 protocol and provide wrapper for communicating with OS and devices.
 
 ## Sources tree structure
