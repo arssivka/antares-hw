@@ -24,7 +24,6 @@
 
 #include <boost/test/unit_test.hpp>
 
-
 BOOST_AUTO_TEST_CASE(one) {
-
+    // I don't have enough time to write tests :(
 }

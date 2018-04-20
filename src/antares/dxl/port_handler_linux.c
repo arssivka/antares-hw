@@ -19,6 +19,7 @@
 #include <linux/serial.h>
 #include <linux/termios.h>
 #include <string.h>
+#include <termio.h>
 #include "port_handler.h"
 
 
@@ -71,12 +72,12 @@ int port_set_baudrate_linux(port_handle_t ph, int baudrate) {
 
 
 int port_write_linux(port_handle_t ph, const char* data, int size) {
-    return write(ph, data, size);
+    return (int) write(ph, data, size);
 }
 
 
 int port_read_linux(port_handle_t ph, char* data, int size) {
-    return read(ph, data, size);
+    return (int) read(ph, data, (size_t) size);
 }
 
 

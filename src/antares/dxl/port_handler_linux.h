@@ -16,6 +16,9 @@
 
 typedef int port_handle_t;
 
+#define PORT_ERROR   (0)
+#define PORT_SUCCESS (1)
+
 #ifdef __cplusplus
 extern "C" {
 #endif

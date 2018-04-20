@@ -71,8 +71,9 @@ int port_read(port_handle_t ph, uint8_t* buff, int buff_len);
 /// \param phs Array of port handlers
 /// \param buff Data buffer
 /// \param buff_len Buffer max length
+/// \param res_ph_index Pointer for getting ph index which has been read (optionally)
 /// \return Length that have been read
-int port_multiple_read(int ph_count, port_handle_t* phs, uint8_t* buff, int buff_len);
+int port_multiple_read(int ph_count, port_handle_t* phs, uint8_t* buff, int buff_len, int* res_ph_index);
 
 #ifdef __cplusplus
 }

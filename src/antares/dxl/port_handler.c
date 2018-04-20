@@ -36,18 +36,6 @@ static int safe_fd_set(int fd, fd_set* fds, int* max_fd) {
 }
 
 
-/* clear fd from fds, update max fd if needed */
-static int safe_fd_clr(int fd, fd_set* fds, int* max_fd) {
-    assert(max_fd != NULL);
-
-    FD_CLR(fd, fds);
-    if (fd == *max_fd) {
-        (*max_fd)--;
-    }
-    return 0;
-}
-
-
 port_handle_t port_open(const char* dev_name) {
     return port_open_linux(dev_name);
 }
@@ -68,7 +56,7 @@ int port_read(port_handle_t ph, uint8_t* buff, int buff_len) {
 }
 
 
-int port_multiple_read(int ph_count, port_handle_t* phs, uint8_t* buff, int buff_len) {
+int port_multiple_read(int ph_count, port_handle_t* phs, uint8_t* buff, int buff_len, int* res_ph_index) {
     fd_set rfds;
     int max_fd;
     int i;
@@ -86,6 +74,9 @@ int port_multiple_read(int ph_count, port_handle_t* phs, uint8_t* buff, int buff
                 bytes_read = port_read(phs[i], buff, buff_len);
                 break;
             }
+        }
+        if (res_ph_index != NULL) {
+            *res_ph_index = i;
         }
     }
     return bytes_read;

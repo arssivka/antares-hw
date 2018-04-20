@@ -5,7 +5,7 @@ set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS} -D_GLIBCXX_USE_NANOSLEEP -Wall")
 set(CMAKE_C_FLAGS_DEBUG "${CMAKE_C_FLAGS} -D_GLIBCXX_USE_NANOSLEEP -Wall")
 
-option(ANTARES_HW_BUILD_TEST "Builds the tests" ON)
+option(ANTARES_HW_BUILD_TEST "Builds the tests" OFF)
 option(ANTARES_HW_BUILD_CPP_WRAPPER "Build cpp interface wrapper" ON)
 option(ANTARES_HW_BUFFER_LENGTH_CHECK "Check buffer length in all functions" ON)
 

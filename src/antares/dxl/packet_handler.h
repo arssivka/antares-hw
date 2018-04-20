@@ -28,6 +28,7 @@
 #include <stdint.h>
 
 #define DXL_MAX_DEVICE_ID                 (0xFD) /**< Max available device ID */
+#define DXL_MAX_PACKAGE_LENGTH            (0x8F) /**< Max length of input and output package (we fount it in nonofficial documentation) */
 #define DXL_FAIL                          (0xFF) /**< Function call error code */
 
 #define DXL_HEADER                        (0xFF) /**< First two bytes of every package is 0xFF */
@@ -66,7 +67,9 @@
 #define DXL_CMD_RESET                     (0x06) /**< Read all parameters from default table */
 
 #define DXL_CHECKSUM_BYTE                 (0x01) /**< Only for code readability */
+#define DXL_CMD_BYTE                      (0x01) /**< Only for code readability */
 #define DXL_PARAM_BYTE                    (0x01) /**< Only for code readability */
+#define DXL_ERROR_BYTE                    (0x01) /**< Only for code readability */
 
 //////////////////////////////////////////////////
 //               CONTROL TABLE                  //
@@ -172,7 +175,7 @@ uint8_t packet_make_reset(uint8_t* buff, int buff_len, uint8_t dev_id);
 /// \param data Data buffer
 /// \param data_len Length of data buffer
 /// \returns Package length if success or DXL_FAIL if length check error
-uint8_t packet_make_write(uint8_t* buff, int buff_len, uint8_t dev_id, uint8_t ctrl_tab_addr, uint8_t* data,
+uint8_t packet_make_write(uint8_t* buff, int buff_len, uint8_t dev_id, uint8_t ctrl_tab_addr, const uint8_t* data,
                           uint8_t data_len);
 
 
@@ -184,7 +187,7 @@ uint8_t packet_make_write(uint8_t* buff, int buff_len, uint8_t dev_id, uint8_t c
 /// \param data Data buffer
 /// \param data_len Length of data buffer
 /// \returns Package length if success or DXL_FAIL if length check error
-uint8_t packet_update_write(uint8_t* buff, int buff_len, uint8_t dev_id, uint8_t ctrl_tab_addr, uint8_t* data,
+uint8_t packet_update_write(uint8_t* buff, int buff_len, uint8_t dev_id, uint8_t ctrl_tab_addr, const uint8_t* data,
                             uint8_t data_len);
 
 
